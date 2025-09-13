@@ -1,0 +1,32 @@
+<div id="param-btns-container">
+  @for (chordBtn of chordService.chordBtns; track chordBtn) {
+
+  <div class="param-btn chord-param-btn chord-param-btn-{{ chordBtn.column }}">
+    <button
+      mat-button
+      class="chord-btn smaller-btn"
+      id="column-chord-{{ chordBtn.column }}"
+      [matMenuTriggerFor]="menu"
+    >
+      @if (chordBtn.name === '-'){
+      <svg chord></svg>
+      }@else {
+      {{ chordBtn.name }}
+      }
+    </button>
+    <mat-menu #menu="matMenu" class="mat-menu">
+      @for (chord of keyService.keyChords.get(keyService.currentKey); track
+      chord) {
+
+      <button
+        mat-menu-item
+        [attr.column]="chordBtn.column"
+        (click)="setChord($event, chord)"
+      >
+        {{ chord.name }}
+      </button>
+      }
+    </mat-menu>
+  </div>
+  }
+</div>

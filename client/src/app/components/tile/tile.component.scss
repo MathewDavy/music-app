@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+
+button{
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 80%;
+    background: $disabled-colour;
+    min-width: unset!important;
+    vertical-align: top;
+}
+
+

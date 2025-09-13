@@ -1,0 +1,49 @@
+<div id="param-btns-container">
+  @for (durationBtn of gridService.durationBtns; track durationBtn) {
+  <div
+    class="param-btn {{ gridService.gridType }}-param-btn  {{
+      gridService.gridType
+    }}-param-btn-{{ durationBtn.column }}"
+  >
+    <button
+      class="{{ gridService.gridType }}-duration-btn duration-btn-{{
+        durationBtn.column
+      }}"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
+      @if (durationBtn.duration === 'wholeNote'){
+      <svg wholeNote></svg>
+      }@else if (durationBtn.duration  === 'halfNote') {
+        <svg halfNote></svg>
+        } @else if (durationBtn.duration  === 'quarterNote') {
+        <svg quarterNote></svg>
+        } @else {
+        <svg eighthNote></svg>
+
+        }
+    </button>
+    <mat-menu #menu="matMenu">
+      @for (duration of durationArray; track duration) {
+
+      <button
+        mat-menu-item
+        [attr.column]="durationBtn.column"
+        (click)="durationService.setDuration(duration, gridService, $event, durationBtn.column)"
+      >
+        @if (duration === 'wholeNote'){
+        <svg wholeNote></svg>
+        }@else if (duration === 'halfNote') {
+        <svg halfNote></svg>
+        } @else if (duration === 'quarterNote') {
+        <svg quarterNote></svg>
+        } @else {
+        <svg eighthNote></svg>
+
+        }
+      </button>
+      }
+    </mat-menu>
+  </div>
+  }
+</div>

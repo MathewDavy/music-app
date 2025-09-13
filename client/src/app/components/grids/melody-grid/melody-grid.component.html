@@ -1,0 +1,39 @@
+<div id="melody-grid" class=gridWithParams> 
+
+    <div id=parent-params>
+
+    <div id="params">
+        <div class="smaller-btns-div">
+                <div class="volume"><app-volume [gridService]=melodyGridService></app-volume></div>
+                <div class="synth"><app-synth [gridService]=melodyGridService></app-synth></div>
+            
+
+            <div >
+                <app-add-column [gridService]=melodyGridService ></app-add-column>
+                <app-delete-column [gridService]=melodyGridService></app-delete-column>
+            </div>
+            
+        </div>
+        
+      <app-select-duration [gridService]=melodyGridService ></app-select-duration>
+    </div>
+    </div>
+
+    <div id="grid">
+        <div id="keys" >
+            <div [ngClass]="note.charAt(1)" class="key" *ngFor="let note of melodyGridService.notes"></div>
+
+        </div>
+
+        <div id="contain-tiles">
+            <div class="tiles" *ngFor="let note of melodyGridService.notes">
+                <app-tile class="app-tile app-tile-{{melodyGridService.gridType}}" [gridService]=melodyGridService
+                [attr.column]=colPos [column]="colPos" [note]=note *ngFor="let colPos of melodyGridService.numColsArr"></app-tile>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

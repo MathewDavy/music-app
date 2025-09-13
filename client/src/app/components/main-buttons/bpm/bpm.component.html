@@ -1,0 +1,6 @@
+<div class="parent-div">
+    <label><b>bpm</b></label>
+    <mat-slider id="bpm" [displayWith]="onChange"(input)=onChange($event.value) 
+    color="primary" [min]=min [max]=max step="1"
+    ><input matSliderThumb [value]="slider"></mat-slider>
+</div>
