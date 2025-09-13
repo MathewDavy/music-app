@@ -1,0 +1,33 @@
+<button  id="synth" mat-button [matMenuTriggerFor]="menu">
+  @if (gridService.synthName === 'sine'){
+      <svg sine></svg>
+      }@else if (gridService.synthName === 'sawtooth'){
+      <svg sawtooth></svg>
+      }
+      @else if (gridService.synthName === 'triangle'){
+      <svg triangle></svg>
+      }
+      @else {
+         <svg square></svg>
+      }
+</button>
+<mat-menu #menu="matMenu">
+    @for (synth of synthService.synthsArray; track synth) {
+
+  <button mat-menu-item (click)="setSynth(synth)" >
+      @if (synth === 'sine'){
+      <svg sine></svg>
+      }@else if (synth === 'sawtooth'){
+      <svg sawtooth></svg>
+      }
+      @else if (synth === 'triangle'){
+      <svg triangle></svg>
+      }
+      @else {
+         <svg square></svg>
+      }
+    
+  </button>
+}
+</mat-menu>
+<!-- svgIcon={{synth}} -->

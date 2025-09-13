@@ -1,0 +1,41 @@
+@import '../../../../variables.scss';
+
+.mat-slider-horizontal {
+    min-width: $tileWidth * 3;
+ }
+ 
+ 
+ .parent-div{
+     height: 100%;
+     display: flex;
+    justify-content: center;
+    align-items: center; 
+
+ }
+ .icon-div{
+    //  height: 100%;
+     display:flex;
+  flex-direction:row;
+  justify-content:center;
+
+ }
+ .slider-div{
+     height: 100%;
+     display:flex;
+     flex-direction:row;
+     justify-content:center;
+ }
+
+ mat-icon{
+    display:flex;             
+    align-self:center;
+    // padding-left: 10x;
+
+ }
+ mat-slider{
+    display:flex;             
+    align-self:center;
+}
+svg {
+   height: 24px;
+}

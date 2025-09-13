@@ -1,0 +1,39 @@
+@import '../../../../variables.scss';
+@import '../shared.scss';
+@import '../../shared.scss';
+
+
+#chord-grid{
+ display: inline-block;
+//  border: 1px black solid;
+
+}
+#grid{
+ height: $gridHeightMelody;
+ width: $melodyGridWidth;
+
+ #contain-tiles{
+   height: $gridHeightMelody;
+ }
+
+}
+#keys{
+   display: inline-block;
+   height: $gridHeightMelody;
+   width: $keyWidth;
+   margin-right: $keyMarginRight;
+
+   .key{
+       height: $rowHeight;
+       width: $keyWidth;
+       background: white;
+       border-top: $keyBorder solid black;
+       border-left: $keyBorder solid black;
+       border-right: $keyBorder solid black;
+
+
+   }
+   .\#{
+       background: black;
+   }
+}

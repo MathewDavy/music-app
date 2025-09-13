@@ -1,0 +1,14 @@
+// @import '../../../theme.scss';
+
+// $primary: map-get($my-app-theme, primary);
+
+
+
+mat-toolbar{
+    background: rgb(79,79,255) !important;
+    
+    span {
+        color: white;
+    }
+
+}
