@@ -24,6 +24,7 @@ import { DurationService } from './components/column-parameters/select-duration/
 import { GenerateMelodyComponent } from './components/main-buttons/generate-melody/generate-melody.component';
 import { SelectKeyComponent } from './components/main-buttons/select-key/select-key.component';
 import { ChordGridComponent } from './components/grids/chord-grid/chord-grid.component';
+
 @Component({
   standalone: true,
   selector: 'app-root',
