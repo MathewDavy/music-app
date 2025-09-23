@@ -33,21 +33,20 @@ namespace api.Controllers
             return Ok(result);
         }
 
-        // [HttpPost]
-        // public async Task<IActionResult> CreateGrid([FromBody] Grid grid)
-        // {
+        [HttpPost]
+        public async Task<IActionResult> CreateGrid([FromBody] Grid grid)
+        {
+            _context.Grid.Add(grid);
+            await _context.SaveChangesAsync();
+            return Ok(grid);
+        }
 
-        //     Console.WriteLine("Received grid:");
-        //     Console.WriteLine(grid);
-        //     GridDb newGrid = new()
-        //     {
-        //         columns = JsonSerializer.Serialize(grid.columns)
-        //     };
-        //     _context.grid.Add(newGrid);
-        //     await _context.SaveChangesAsync();
-
-
-        //     return Ok(grid);
-        // }
+         [HttpDelete]
+        public async Task<IActionResult> DeleteGrid(int gridId)
+        {
+            Console.WriteLine($"Deleting grid with ID: {gridId}");
+            var rows = await _context.Grid.Where(grid => grid.id == gridId).ExecuteDeleteAsync();
+            return Ok(true);
+        }
     }
 }
