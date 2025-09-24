@@ -3,6 +3,7 @@ import { IChord } from '../../../models/IChord';
 import { ChordGridService } from '../../grids/chord-grid/chord-grid.service';
 import { ColumnParameter } from '../ColumnParameter';
 import { TileColours } from 'src/app/models/TileColours';
+import { Grid } from '../../grids/Grid';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +24,13 @@ export class ChordService extends ColumnParameter {
     }
   }
 
-    setChordWithNode = (node: any, chord: IChord) => {
+    setChordWithNode = (node: any, chord: IChord, gridService: Grid) => {
       let column: string = node.target.parentNode.getAttribute('column');
-      this.setChord(column, chord);
+      this.setChord(column, chord, gridService);
     };
 
 
-     setChord = (column: string, chord: IChord) => {
+     setChord = (column: string, chord: IChord, gridService: Grid) => {
       let chordBtn = this.chordBtns.find(
         (chordBtn) => chordBtn.column === parseInt(column),
       )
@@ -37,8 +38,8 @@ export class ChordService extends ColumnParameter {
         chordBtn.name = chord.name;
       }
   
-      this.chordGridService
-        .getColumn(column, 'tile-chord')
+      gridService
+        .getColumn(column, 'tile-note')
         .forEach((tile: Element) => {
           tile.setAttribute(
             'style',

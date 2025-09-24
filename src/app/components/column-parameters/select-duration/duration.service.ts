@@ -90,6 +90,7 @@ export class DurationService {
           });
       }
     } catch (e) {
+      console.log(e)
       this.setDuration(
         duration,
         gridService,
