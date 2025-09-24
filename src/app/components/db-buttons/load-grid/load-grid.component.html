@@ -8,7 +8,7 @@
 </button>
 <mat-menu #menu="matMenu">
   @for (grid of dbService.grids; track grid) {
-  <button mat-menu-item (click)="loadGrid()">{{ grid.id }}</button>
+  <button mat-menu-item (click)="loadGrid(grid.id)">{{ grid.id }}</button>
 
   }
 </mat-menu>

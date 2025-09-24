@@ -27,29 +27,4 @@ export class SelectChordComponent extends ColumnParameter {
     super();
   }
 
-  setChord = (event: any, chord: IChord) => {
-    let column: string = event.target.parentNode.getAttribute('column');
-    this.chordService.chordBtns.find(
-      (chordBtn) => chordBtn.column === parseInt(column),
-    ).name = chord.name;
-
-    this.chordGridService
-      .getColumn(column, 'tile-chord')
-      .forEach((tile: Element) => {
-        tile.setAttribute(
-          'style',
-          `${this.setStyle(tile, 'background', TileColours.disabled)}`,
-        );
-        tile.setAttribute('enabled', 'false');
-        if (
-          chord.notes.find((note: string) => note === tile.getAttribute('note'))
-        ) {
-          tile.setAttribute(
-            'style',
-            `${this.setStyle(tile, 'background', TileColours.enabled)}`,
-          );
-          tile.setAttribute('enabled', 'true');
-        }
-      });
-  };
 }
