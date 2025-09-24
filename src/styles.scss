@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 @font-face {
   font-family: roboto;
   src: url(assets/fonts/Roboto/Roboto-Regular.ttf) format("truetype");
@@ -25,3 +27,22 @@ body {
     background-color: #FFFFFF!important;
   }
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+.button-common{
+    margin: 5px 10px;
+    background-color:  $main-theme;
+    color: white;
+    padding: 0; 
+    width: $tileWidth * 2;                                      ;
+    height: 100%;
+    min-width: unset!important;
+    .mat-icon {
+        color: white;
+        fill: white;
+    }
+}
+

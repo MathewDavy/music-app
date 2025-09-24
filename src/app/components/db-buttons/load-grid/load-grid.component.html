@@ -1,0 +1,16 @@
+<!-- <button class="button-common" id="play" mat-raised-button (click)="loadGrid()">
+  <p>Load grid</p>
+</button> -->
+<button
+  class="button-common"
+  mat-raised-button
+  [matMenuTriggerFor]="menu"
+>
+ <p>Load grid</p>
+</button>
+<mat-menu #menu="matMenu">
+  @for (grid of dbService.grids; track grid) {
+  <button mat-menu-item (click)="loadGrid()">{{ grid.id }}</button>
+
+  }
+</mat-menu>

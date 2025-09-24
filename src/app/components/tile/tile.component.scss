@@ -8,6 +8,10 @@ button{
     background: $disabled-colour;
     min-width: unset!important;
     vertical-align: top;
+
+    &:hover {
+        cursor: default;
+    }
 }
 
 
