@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 @font-face {
   font-family: roboto;
@@ -22,9 +22,15 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  
+
   .mat-mdc-menu-panel {
-    background-color: #FFFFFF!important;
+    background-color: #ffffff !important;
+  }
+  .mat-mdc-menu-item {
+    transition: background-color 0.15s;
+  }
+  .mat-mdc-menu-item:hover {
+    background-color: #e8e8e8 !important;
   }
 }
 
@@ -32,17 +38,16 @@ button:hover {
   cursor: pointer;
 }
 
-.button-common{
-    margin: 5px 10px;
-    background-color:  $main-theme;
+.button-common {
+  margin: 5px 10px;
+  background-color: $main-theme;
+  color: white;
+  padding: 0;
+  width: $tileWidth * 2;
+  height: 100%;
+  min-width: unset !important;
+  .mat-icon {
     color: white;
-    padding: 0; 
-    width: $tileWidth * 2;                                      ;
-    height: 100%;
-    min-width: unset!important;
-    .mat-icon {
-        color: white;
-        fill: white;
-    }
+    fill: white;
+  }
 }
-
