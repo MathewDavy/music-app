@@ -1,0 +1,21 @@
+
+
+<div class="load-grid-container">
+  @if (grids) {
+  <p>{{grids.name}}</p>
+  }
+  <button
+  class="button-common"
+  mat-raised-button
+  [matMenuTriggerFor]="menu"
+>
+ Load melody
+</button>
+<mat-menu #menu="matMenu">
+  @for (grid of dbService.grids; track grid) {
+  <button mat-menu-item (click)="loadGrids(grid.id)">{{ grid.name }}</button>
+
+  }
+</mat-menu>
+
+</div>

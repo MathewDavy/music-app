@@ -1,0 +1,22 @@
+.save-grid-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input {
+   background: #ebebfa;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    line-height: 25px;
+}
+
+svg {
+    width: 24px;
+}
+button[disabled] {
+  background-color: #cccccc; /* Lighter grey */
+  color: #666666; /* Darker text */
+  cursor: not-allowed; /* Indicate non-interactivity */
+}

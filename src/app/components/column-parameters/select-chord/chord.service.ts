@@ -31,6 +31,7 @@ export class ChordService extends ColumnParameter {
 
 
      setChord = (column: string, chord: IChord, gridService: Grid) => {
+      console.log(`app-tile-${gridService.gridType}`);
       let chordBtn = this.chordBtns.find(
         (chordBtn) => chordBtn.column === parseInt(column),
       )
@@ -39,7 +40,7 @@ export class ChordService extends ColumnParameter {
       }
   
       gridService
-        .getColumn(column, 'tile-note')
+        .getColumn(column,  `tile-${gridService.gridType}`)
         .forEach((tile: Element) => {
           tile.setAttribute(
             'style',

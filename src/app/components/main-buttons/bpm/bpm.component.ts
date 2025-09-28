@@ -21,7 +21,6 @@ export class BpmComponent implements OnInit {
   ngOnInit(): void {}
 
   onChange(value: number): void {
-    console.log(value);
     if (value) {
       Tone.Transport.bpm.value = value;
     }

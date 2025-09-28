@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IColumn } from 'src/app/models/IColumn';
@@ -18,8 +18,8 @@ export class DbService {
 
   constructor(private http: HttpClient) {
     this.getGrids().subscribe({
-      next: (response) => {
-        this.grids = response.map((grids: any) => {
+      next: (response: HttpResponse<any>) => {
+        this.grids = response.body.map((grids: any) => {
           return {
             chordGrid: grids.chordGrid.map((column: any, index: number) => {
               return {
@@ -33,23 +33,25 @@ export class DbService {
                 chord: { notes: column.notes }
               } as IColumn
             }),
-            id: grids.id  
+            id: grids.id,
+            name: grids.name
           } as IGrids;
         });
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('API call error:', error);
-      },
-      complete: () => {
-        console.log('API call completed.');
-
       }
-    });
+    }
+
+    )
   }
 
+  getGrids(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.baseUrl}/grids`, { observe: 'response' });
+  }
 
-  getGrids(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/grids`)
+  saveGrids(body): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.baseUrl}/grids`, body, { observe: 'response' })
   }
 
 

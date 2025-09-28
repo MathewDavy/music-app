@@ -81,6 +81,20 @@ export abstract class Grid {
     }
   }
 
+   parseToneJSDuration(duration: string): string {
+    if (duration === '1n') {
+      return 'wholeNote';
+    } else if (duration === '2n') {
+      return 'halfNote';
+    }
+    if (duration === '4n') {
+      return 'quarterNote';
+    }
+    if (duration === '8n') {
+      return 'eighthNote';
+    }
+  }
+
   resetDurations(): void {
     this.durationBtns.forEach((durationBtn) => {
       durationBtn.duration = this.startingDuration;

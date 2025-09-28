@@ -25,6 +25,9 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      align-items: end;
+      width: 350px;
+      padding-left: 50px;
     }
 
     #toolbar {
@@ -33,7 +36,7 @@
         gap: 50px;
       text-align: center;
       // width: $melodyAndDrumWidth;
-      margin: auto;
+      // margin: auto;
       // float: right;
     }
   }

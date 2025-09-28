@@ -10,19 +10,5 @@ import { ApiService } from "src/app/services/api.service";
   imports: [MatToolbarModule],
 })
 export class ToolbarComponent implements OnInit {
-  constructor(private apiService: ApiService) {
-    const gridData: IColumn[] = [
-      {
-        duration: { column: 1, duration: "quarterNote" },
-        chord: { notes: ['A4', 'C4', 'E4'] },
-      },
-      {
-        duration: { column: 3, duration: "quarterNote" },
-        chord: { notes: ['C4', 'E4', 'G4'] },
-      },
-    ];
-    this.apiService.saveGrid(gridData).subscribe((data) => console.log(data));
-  }
-
   ngOnInit(): void {}
 }

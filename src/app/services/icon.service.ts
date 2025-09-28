@@ -17,7 +17,6 @@ export class IconService {
   }
 
   private loadIcons(iconKeys: string[], iconUrl: string): void {
-    console.log(`${iconUrl}/${iconKeys[0]}.svg`);
 
     iconKeys.forEach((key) => {
       this.matIconRegistry.addSvgIcon(

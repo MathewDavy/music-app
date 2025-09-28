@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="saveGrids()">
+  <div class="save-grid-container">
+    @if (showTick) {
+      Melody saved! <svg tick></svg>
+    }
+
+    <input type="text" formControlName="name" placeholder="My melody" />
+
+    <button
+      class="button-common"
+      mat-raised-button
+      type="submit"
+      [disabled]="!form.valid"
+    >
+      Save melody
+    </button>
+  </div>
+</form>
