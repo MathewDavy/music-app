@@ -21,7 +21,7 @@
       <button
         mat-menu-item
         [attr.column]="chordBtn.column"
-        (click)="chordService.setChordWithNode($event, chord, chordGridService)"
+        (click)="chordService.setChordWithNode($event, chord.notes, chordGridService)"
       >
         {{ chord.name }}
       </button>

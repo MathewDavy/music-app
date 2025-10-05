@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IColumn } from 'src/app/models/IColumn';
-import { IGrids } from 'src/app/models/IGrids';
+import { ISong } from 'src/app/models/ISong';
 
 
 
@@ -13,30 +13,15 @@ import { IGrids } from 'src/app/models/IGrids';
 })
 export class DbService {
   private baseUrl = 'http://localhost:5291/api'; // Replace with your actual API base URL
-  public grids: IGrids[] = [];
+  public songs: ISong[] = [];
+  public currentSong: ISong;
 
 
   constructor(private http: HttpClient) {
-    this.getGrids().subscribe({
+    this.getSongs().subscribe({
       next: (response: HttpResponse<any>) => {
-        this.grids = response.body.map((grids: any) => {
-          return {
-            chordGrid: grids.chordGrid.map((column: any, index: number) => {
-              return {
-                duration: { duration: column.duration, column: index + 1 },
-                chord: { notes: column.notes }
-              } as IColumn
-            }),
-            melodyGrid: grids.melodyGrid.map((column: any, index: number) => {
-              return {
-                duration: { duration: column.duration, column: index + 1 },
-                chord: { notes: column.notes }
-              } as IColumn
-            }),
-            id: grids.id,
-            name: grids.name
-          } as IGrids;
-        });
+        this.songs = response.body;
+        console.log(this.songs)
       },
       error: (error: HttpErrorResponse) => {
         console.error('API call error:', error);
@@ -46,12 +31,13 @@ export class DbService {
     )
   }
 
-  getGrids(): Observable<HttpResponse<any>> {
-    return this.http.get<any>(`${this.baseUrl}/grids`, { observe: 'response' });
+
+  getSongs(): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.baseUrl}/songs`, { observe: 'response' });
   }
 
-  saveGrids(body): Observable<HttpResponse<any>> {
-    return this.http.post<any>(`${this.baseUrl}/grids`, body, { observe: 'response' })
+  saveSong(body): Observable<HttpResponse<any>> {
+    return this.http.post<any>(`${this.baseUrl}/songs`, body, { observe: 'response' })
   }
 
 

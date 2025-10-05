@@ -24,7 +24,6 @@ import { DurationService } from './components/column-parameters/select-duration/
 import { GenerateMelodyComponent } from './components/main-buttons/generate-melody/generate-melody.component';
 import { SelectKeyComponent } from './components/main-buttons/select-key/select-key.component';
 import { ChordGridComponent } from './components/grids/chord-grid/chord-grid.component';
-import { LoadGridsComponent } from './components/db-buttons/load-grids/load-grids.component';
 
 @Component({
   standalone: true,
@@ -50,8 +49,7 @@ import { LoadGridsComponent } from './components/db-buttons/load-grids/load-grid
     GridsContainerComponent,
     GenerateMelodyComponent,
     SelectKeyComponent,
-    ChordGridComponent,
-    LoadGridsComponent
+    ChordGridComponent
   ],
 })
 export class AppComponent {

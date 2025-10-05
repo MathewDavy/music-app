@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Grid } from '../Grid';
 import { DurationService } from '../../column-parameters/select-duration/duration.service';
-import { IChord } from 'src/app/models/IChord';
 import * as Rhythm from '../../../Rhythm';
 import * as Tone from 'tone';
 import { TileColours } from 'src/app/models/TileColours';

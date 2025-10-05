@@ -7,16 +7,18 @@ import { ChordGridService } from '../../grids/chord-grid/chord-grid.service';
 import { MelodyGridService } from '../../grids/melody-grid/melody-grid.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { TickIcon } from '../../icons/tickIcon.component';
-import { IGrids } from 'src/app/models/IGrids';
+import { ISong } from 'src/app/models/ISong';
 import { ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
+
 export class App { }
 @Component({
-  selector: 'app-save-grids',
+  selector: 'app-save-song',
   imports: [MatMenuModule, TickIcon, ReactiveFormsModule],
-  templateUrl: './save-grids.component.html',
-  styleUrl: './save-grids.component.scss'
+  templateUrl: './save-song.component.html',
+  styleUrl: './save-song.component.scss'
 })
-export class SaveGridsComponent {
+export class SaveSongComponent {
 
   constructor(
     public dbService: DbService,
@@ -43,37 +45,37 @@ export class SaveGridsComponent {
     this.showTick = false;
   }
 
-  saveGrids = () => {
+  saveSong = () => {
 
-    const grids: IGrids = {
-      chordGrid: this.getGridJson(this.chordGridService.getChordMelody()),
-      melodyGrid: this.getGridJson(this.melodyGridService.getMainMelody()),
+    const song: ISong = {
+      chordGrid: this.getGridJson(this.chordGridService.getChordMelody(), this.chordGridService.synthName),
+      melodyGrid: this.getGridJson(this.melodyGridService.getMainMelody(), this.melodyGridService.synthName),
       name: this.form.value.name,
     }
 
-    this.dbService.saveGrids(grids).subscribe({
-
-      next: (response: HttpResponse<any>) => {
+     this.dbService.saveSong(song).pipe( switchMap((data: any) => {
         this.showTick = true;
-        // setTimeout(() => {
-        //   this.showTick = false;
-        // }, 2000);
-        console.log('Grid saved successfully:', response);
-      },
-      error: (error: HttpErrorResponse) => {
-        console.error('Error saving grid:', error);
-      }
+        return this.dbService.getSongs();
+     })).subscribe({
+       next: (response: HttpResponse<any>) => {
+        this.dbService.songs = response.body
+       }
+     })
 
-    })
   };
 
-  getGridJson = (gridObj) => {
-    return gridObj._events.map((event) => {
-      return {
-        notes: event.value.note,
-        duration: this.chordGridService.parseToneJSDuration(event.value.duration),
-      }
-    })
+  getGridJson = (melody, synth) => {
+    console.log(melody)
+    return {
+      columns: melody._events.map((event) => {
+        return {
+         
+            notes: event.value.note,
+          duration: this.chordGridService.parseToneJSDuration(event.value.duration)}
+        
+      }),
+      synth
+    }
   }
 
 }

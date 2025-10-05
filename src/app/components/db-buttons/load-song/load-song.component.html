@@ -1,8 +1,8 @@
 
 
 <div class="load-grid-container">
-  @if (grids) {
-  <p>{{grids.name}}</p>
+  @if (song) {
+  <p>{{song.name}}</p>
   }
   <button
   class="button-common"
@@ -12,8 +12,8 @@
  Load melody
 </button>
 <mat-menu #menu="matMenu">
-  @for (grid of dbService.grids; track grid) {
-  <button mat-menu-item (click)="loadGrids(grid.id)">{{ grid.name }}</button>
+  @for (song of dbService.songs; track song) {
+  <button mat-menu-item (click)="loadSong(song.id)">{{ song.name }}</button>
 
   }
 </mat-menu>

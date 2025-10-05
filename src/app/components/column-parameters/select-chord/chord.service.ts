@@ -4,6 +4,7 @@ import { ChordGridService } from '../../grids/chord-grid/chord-grid.service';
 import { ColumnParameter } from '../ColumnParameter';
 import { TileColours } from 'src/app/models/TileColours';
 import { Grid } from '../../grids/Grid';
+import { SelectKeyService } from '../../main-buttons/select-key/select-key.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export class ChordService extends ColumnParameter {
   public startingChord: IChord;
   public chordBtns = [];
 
-  constructor(public chordGridService: ChordGridService) {
-        super();
+  constructor(public chordGridService: ChordGridService, public selectKeyService: SelectKeyService) {
+    super();
 
     this.startingChord = { notes: [], name: '-' };
     for (let i = 1; i <= this.chordGridService.numCols; i++) {
@@ -24,40 +25,48 @@ export class ChordService extends ColumnParameter {
     }
   }
 
-    setChordWithNode = (node: any, chord: IChord, gridService: Grid) => {
-      let column: string = node.target.parentNode.getAttribute('column');
-      this.setChord(column, chord, gridService);
-    };
+  setChordWithNode = (node: any, notes: string[], gridService: Grid) => {
+    let column: string = node.target.parentNode.getAttribute('column');
+    this.setChord(column, notes, gridService);
+  };
 
 
-     setChord = (column: string, chord: IChord, gridService: Grid) => {
-      console.log(`app-tile-${gridService.gridType}`);
-      let chordBtn = this.chordBtns.find(
-        (chordBtn) => chordBtn.column === parseInt(column),
-      )
-      if (chord.name && chordBtn) {
-        chordBtn.name = chord.name;
+  setChord = (column: string, notes: string[], gridService: Grid) => {
+    let chordBtn = this.chordBtns.find(
+      (chordBtn) => chordBtn.column === parseInt(column),
+    )
+    if (chordBtn) {
+      for (const [key, value] of this.selectKeyService.keyChords) {
+        let chordName = value.find((chord: IChord) => chord.notes.length === notes.length && chord.notes.every((value, index) => value === notes[index]))?.name;
+        console.log('found name:', chordName, notes);
+        if (chordName) {
+          console.log('Found chord name:', chordName);
+          chordBtn.name = chordName;
+          break;
+        }
       }
-  
-      gridService
-        .getColumn(column,  `tile-${gridService.gridType}`)
-        .forEach((tile: Element) => {
+
+    }
+
+    gridService
+      .getColumn(column, `tile-${gridService.gridType}`)
+      .forEach((tile: Element) => {
+        tile.setAttribute(
+          'style',
+          `${this.setStyle(tile, 'background', TileColours.disabled)}`,
+        );
+        tile.setAttribute('enabled', 'false');
+        if (
+          notes.find((note: string) => note === tile.getAttribute('note'))
+        ) {
           tile.setAttribute(
             'style',
-            `${this.setStyle(tile, 'background', TileColours.disabled)}`,
+            `${this.setStyle(tile, 'background', TileColours.enabled)}`,
           );
-          tile.setAttribute('enabled', 'false');
-          if (
-            chord.notes.find((note: string) => note === tile.getAttribute('note'))
-          ) {
-            tile.setAttribute(
-              'style',
-              `${this.setStyle(tile, 'background', TileColours.enabled)}`,
-            );
-            tile.setAttribute('enabled', 'true');
-          }
-        });
-    };
+          tile.setAttribute('enabled', 'true');
+        }
+      });
+  };
 
   resetChords(): void {
     this.chordBtns.forEach((chordBtn) => {

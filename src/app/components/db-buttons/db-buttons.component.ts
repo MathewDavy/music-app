@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import {  LoadGridsComponent } from './load-grids/load-grids.component';
 import { DbService } from './db.service';
-import { IChord } from 'src/app/models/IChord';
 import { IColumn } from 'src/app/models/IColumn';
 import { IDuration } from 'src/app/models/IDuration';
-import { SaveGridsComponent } from './save-grids/save-grids.component';
+import { SaveSongComponent } from './save-song/save-song.component';
+import { LoadSongComponent } from './load-song/load-song.component';
 
 
 @Component({
   selector: 'app-db-buttons',
-  imports: [LoadGridsComponent, SaveGridsComponent],
+  imports: [ SaveSongComponent, LoadSongComponent],
   templateUrl: './db-buttons.component.html',
   styleUrl: './db-buttons.component.scss'
 })

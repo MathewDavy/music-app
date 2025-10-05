@@ -7,12 +7,12 @@ import { ChordGridService } from '../../grids/chord-grid/chord-grid.service';
 import { MelodyGridService } from '../../grids/melody-grid/melody-grid.service';
 
 @Component({
-  selector: 'app-load-grids',
+  selector: 'app-load-song',
   imports: [MatMenuModule],
-  templateUrl: './load-grids.component.html',
-  styleUrl: './load-grids.component.scss'
+  templateUrl: './load-song.component.html',
+  styleUrl: './load-song.component.scss'
 })
-export class LoadGridsComponent {
+export class LoadSongComponent {
 
   constructor(
     public dbService: DbService,
@@ -24,17 +24,17 @@ export class LoadGridsComponent {
   ) {
   }
 
-  public grids;
+  public song;
 
-  loadGrids = (id: number) => {
-    this.grids = this.dbService.grids.find(grid => grid.id === id);
+  loadSong = (id: number) => {
+    this.song = this.dbService.songs.find(song => song.id === id);
 
-    this.grids.chordGrid.forEach((column, index) => {
-      this.chordService.setChord(index + 1 + '', column.chord, this.chordGridService);
+    this.song.chordGrid.columns.forEach((column, index) => {
+      this.chordService.setChord(index + 1 + '', column.notes, this.chordGridService);
       this.durationService.setDuration(column.duration.duration, this.chordGridService, null, index + 1);
     });
-     this.grids.melodyGrid.forEach((column, index) => {
-      this.chordService.setChord(index + 1 + '', column.chord, this.melodyGridService);
+     this.song.melodyGrid.columns.forEach((column, index) => {
+      this.chordService.setChord(index + 1 + '', column.notes, this.melodyGridService);
       this.durationService.setDuration(column.duration.duration, this.melodyGridService, null, index + 1);
     });
 
